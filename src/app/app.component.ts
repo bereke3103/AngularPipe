@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Post {
   title: string;
@@ -10,31 +11,27 @@ export interface Post {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  e: number = Math.E;
+export class AppComponent implements OnInit {
+  promise: Promise<string> = new Promise<string>((resolve) => {
+    setTimeout(() => {
+      resolve('Promise resolved');
+    }, 1000);
+  });
 
-  str: string = 'Hello world';
-
-  date: Date = new Date();
-
-  float: number = 0.5;
-
-  obj = {
-    name: 'Bereke',
-    age: 24,
-    lastname: 'Sakan',
-    nat: 'Kazakh',
-  };
-
-  //
-
-  searhcField = 'title';
-
-  AllPosts: Post[] = [
-    { title: 'Компьютер', text: 'Это самый лучший компьютер' },
-    { title: 'Ноутбук', text: 'Ноутбук это то, через чего удобно работать' },
-    { title: 'Телефон', text: 'Сейчас все сидят в инстаграмме и телеграамме' },
-  ];
-
-  search: string = '';
+  //Так как мы подписываемся на стрим, желательно подписывать его со знаком доллара
+  date$: Observable<Date> = new Observable((obs) => {
+    setInterval(() => {
+      obs.next(new Date());
+    }, 500);
+  });
+  //классический подход без async в html
+  date: Date;
+  constructor() {
+    this.date = new Date();
+  }
+  ngOnInit(): void {
+    this.date$.subscribe((kek) => {
+      this.date = kek;
+    });
+  }
 }

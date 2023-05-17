@@ -1,68 +1,9 @@
 <div class="container">
   <h1>Angular Pipes</h1>
 
-  <button class="btn" (click)="searhcField = 'title'">Title</button>
-  <button class="btn" (click)="searhcField = 'text'">Text</button>
-  <input type="text" [(ngModel)]="search" />
+  <!-- если не подписываться то есть без async, то автоматически будет форматироваться в toString() и выводить [object Promise] -->
+  <p>Wait... {{ promise | async }}</p>
 
-  <div
-    *ngFor="let post of AllPosts | search : search : searhcField; let i = index"
-    class="card"
-  >
-    <p>{{ i + 1 }}. {{ post.title }}</p>
-    <p>{{ post.text }}</p>
-  </div>
-
-  <hr />
-  <!-- 02.7 -->
-  <p>{{ e | number : "2.1-1" }}</p>
-
-  <!-- 3 -->
-  <p>{{ e | number : "1.0-0" }}</p>
-
-  <!-- HELLO WORLD -->
-  <p>{{ str | uppercase }}</p>
-
-  <!-- hello world -->
-  <p>{{ str | lowercase }}</p>
-
-  <!-- Hello World -->
-  <p>{{ str | titlecase }}</p>
-
-  <!-- ello W -->
-  <p>{{ str | titlecase | slice : 1 : 7 }}</p>
-
-  <p style="font-weight: bold">{{ date }}</p>
-
-  <!-- $0.50 -->
-  <p>{{ float | currency }}</p>
-
-  <!-- 50% -->
-  <p>{{ float | percent }}</p>
-
-  <!-- 50.00% -->
-  <p>{{ float | percent : "2.2-5" }}</p>
-
-  <!-- [object Object] -->
-
-  <p>{{ obj }}</p>
-
-  <!-- { "name": "Bereke", "age": 24, "lastname": "Sakan", "nat": "Kazakh" } -->
-  <p>{{ obj | json }}</p>
-
-  <!-- {
-  "name": "Bereke",
-  "age": 24,
-  "lastname": "Sakan",
-  "nat": "Kazakh"
-  } -->
-  <pre>{{ obj | json }}</pre>
-
-  <h1>Созданные вручную пайпы</h1>
-  <h2>{{ 10 | mult }}</h2>
-  <h2>{{ 10 | mult : 2 }}</h2>
-  <h2>{{ 10 | mult : 10 }}</h2>
-  <h2>{{ 10 | mult : 1 }}</h2>
-  <h2>{{ 10 | mult : 8 }}</h2>
-  <h2>{{ 10 | mult : 2 }}</h2>
+  <!-- Классический подход для pipe -->
+  <p>Date: {{ date }}</p>
 </div>
